@@ -1,4 +1,4 @@
-# SkullerudKlatresenter
+# SkullerudKlatresenter ![example workflow](https://github.com/mariusmoe/skullerud-klatresenter/actions/workflows/firebase-hosting-merge.yml/badge.svg)
 
 Try it on: https://skullerud-klatresenter.web.app/
 

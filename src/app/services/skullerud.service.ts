@@ -5,8 +5,9 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { TimeSlot } from '../types/TimeSlot';
+import { catchError, map } from 'rxjs/operators';
+import { TimeSlot, TimeSlotDTO } from '../types/TimeSlot';
+import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root',
@@ -25,25 +26,34 @@ export class SkullerudService {
   async getAviliableSlots(date: Date) {
     const headers = this.createHeaders();
 
-    const startDate = new Date(date.setHours(2,0,0,0))
+    const startDate = new Date(date.setHours(2, 0, 0, 0));
 
-    const endDate = new Date(date.setHours(23,23,23,999))
+    const endDate = new Date(date.setHours(23, 23, 23, 999));
 
     const configUrl = `https://osloklatresenter.brpsystems.com/brponline/api/ver3/products/services/3233/suggestions?businessUnit=1&period=${startDate.toISOString()}%7C${endDate.toISOString()}`;
 
     console.log(configUrl);
 
-    const data = await this.http
-      .get<TimeSlot[]>(configUrl, { headers })
-      .pipe(catchError(this.handleError)).toPromise()
-
-      // TODO: if time selectedTimeSlots er satt
-      // -> finn timeslotter med ledige plasser
+    const data: TimeSlot[] = await this.http
+      .get<TimeSlotDTO[]>(configUrl, { headers })
+      .pipe(catchError(this.handleError))
+      .pipe(
+        map((response) => {
+          return response.map((x) => {
+            return {
+              ...x,
+              duration: {
+                start: DateTime.fromISO(x.duration.start),
+                end: DateTime.fromISO(x.duration.end),
+              },
+            };
+          });
+        })
+      )
+      .toPromise();
 
     console.log(data);
-
     return data;
-
   }
 
   private handleError(error: HttpErrorResponse) {

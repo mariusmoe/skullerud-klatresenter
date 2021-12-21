@@ -8,15 +8,4 @@ import { SkullerudService } from './services/skullerud.service';
 })
 export class AppComponent {
   title = 'skullerud-klatresenter';
-
-  constructor(private skullerudService: SkullerudService) {}
-
-  async fetchSlots() {
-    console.log('fetch clicked!');
-
-    const result = await this.skullerudService.getAviliableSlots(new Date())
-    console.log(result);
-
-
-  }
 }

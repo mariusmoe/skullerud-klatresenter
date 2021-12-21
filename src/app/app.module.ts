@@ -15,6 +15,9 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 
 
@@ -35,7 +38,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatDatepickerModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'no-NO' }],
   bootstrap: [AppComponent]

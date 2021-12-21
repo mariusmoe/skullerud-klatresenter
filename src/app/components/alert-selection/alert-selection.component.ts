@@ -134,7 +134,7 @@ export class AlertSelectionComponent implements OnInit {
   }
 
   search() {
-    this.source = interval(5000);
+    this.source = interval(30000);
     this.subscription = this.source.subscribe(val => {
       console.log(val, 'asd');  
       this.oldSearches.push({number: val, time: DateTime.now() })

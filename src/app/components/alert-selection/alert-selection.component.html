@@ -1,0 +1,53 @@
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Selecciona una fecha</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="date" (dateChange)="addEvent('change', $event)" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+<div>
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Elige una franja horaria</mat-label>
+    <mat-chip-list #chipList aria-label="Select time slots">
+      <mat-chip
+        *ngFor="let option of options"
+        (removed)="remove(option)">
+        {{option}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input
+        placeholder="Nuevo tiempo..."
+        #timeSlotInput
+        [formControl]="timeSlotCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+<div class="flex">
+    <button mat-raised-button color="primary" aria-label="Add time to search" (click)="check()">
+      <span>una vez </span><mat-icon>search</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" aria-label="Add time to search" (click)="search()">
+      <span>Comprobar continuamente </span><mat-icon>find_replace</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" aria-label="Add time to search" (click)="stopInterval()">
+      <span>Deja de repetir </span><mat-icon>cancel</mat-icon>
+    </button>
+</div>
+  <div class="default-width" *ngIf="availableTimeSlots.length > 0">
+    Ledig klatring <pre>{{ availableTimeSlots | json }}</pre>
+  </div>
+  <div class="default-width" *ngIf="availableTimeSlots.length === 0 && subscription != undefined ">
+    Søker... <pre>{{ oldSearches | json}}</pre>
+  </div>
+</div>

@@ -7,3 +7,21 @@
 mat-form-field {
   min-width: 600px;
 }
+
+
+.example-button-container{
+  margin-bottom: 20px;
+}
+
+.flex {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.default-width {
+  width: 600px;
+  height: 450px;
+  overflow-y: auto;
+  margin-top: 20px;
+}

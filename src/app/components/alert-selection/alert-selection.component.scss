@@ -3,24 +3,24 @@
   margin-top: 20px;
 }
 
-
 mat-form-field {
-  min-width: 600px;
-}
-
-
-.example-button-container{
-  margin-bottom: 20px;
+  max-width: 600px;
+  width: 100%;
 }
 
 .flex {
-  width: 600px;
+  max-width: 600px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+
+  > * {
+    margin-top: 1.5rem;
+  }
 }
 
 .default-width {
-  width: 600px;
+  max-width: 600px;
   height: 450px;
   overflow-y: auto;
   margin-top: 20px;

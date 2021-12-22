@@ -23,7 +23,7 @@ export class SkullerudService {
     });
   }
 
-  async getAviliableSlots(date: Date) {
+  async getAvailableSlots(date: Date) {
     const headers = this.createHeaders();
 
     const startDate = new Date(date.setHours(2, 0, 0, 0));

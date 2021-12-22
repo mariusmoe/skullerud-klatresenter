@@ -117,7 +117,7 @@ export class AlertSelectionComponent implements OnInit {
   }
 
   async check() {
-    this.availableSlots = await this.skullerudService.getAviliableSlots(
+    this.availableSlots = await this.skullerudService.getAvailableSlots(
       this.searchDate.toJSDate()
     );
     const searchForTimeSlots: Time[] = this.options
@@ -166,5 +166,6 @@ export class AlertSelectionComponent implements OnInit {
   stopInterval() {
     this.subscription?.unsubscribe();
     this.availableTimeSlots = [];
+    this.oldSearches = [];
   }
 }
